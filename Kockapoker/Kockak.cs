@@ -15,6 +15,10 @@ namespace Kockapoker
       Feltolt();
     } 
 
+    /// <summary>
+    /// 5 db véletlen szám az értékek tömbbe
+    /// </summary>
+
     private void Feltolt()
     {
       Random vel = new Random(Guid.NewGuid().GetHashCode());
@@ -24,6 +28,10 @@ namespace Kockapoker
       }
 
     }
+    /// <summary>
+    /// A dobás pontértékét egész számként adja vissza.
+    /// </summary>
+    /// <returns></returns>
     public int Ertek()
     {
       KiErtekel();
@@ -33,7 +41,11 @@ namespace Kockapoker
       }
       return 0;
     }
-    
+    /// <summary>
+    /// Statisztikát készít a számokból ( melyik számból mennyi van)
+    /// Ha nem fordul elő a szám, akkor nem szerepel a dict-ben.
+    /// </summary>
+
     private void Csoportosit()
     {
       foreach (var e in ertekek)
@@ -48,6 +60,9 @@ namespace Kockapoker
         }
       }
     }
+    /// <summary>
+    /// Egy darab előfordulásokat ki veszi a dict-ből.
+    /// </summary>
     private void Egyszerusit()
     {
       List<int> egyesek = new List<int>();
@@ -63,17 +78,28 @@ namespace Kockapoker
         minta.Remove(e);
       }
     }
+    /// <summary>
+    /// Elvégzi a dobás kiértékelését.
+    /// </summary>
+
     private void KiErtekel()
     {
       Csoportosit();
       Egyszerusit();
     }
-
+    /// <summary>
+    /// A dobást vissza adja szövegesen összefűzve.
+    /// pl.: 1-1-2-3-3-3
+    /// </summary>
+    /// <returns></returns>
     public string ErtekSzoveg()
     {
       Sorrendbe();
       return String.Join("-", ertekek);
     }
+    /// <summary>
+    /// Novekvő sorrendbe rakja a dobásokat. (értékek tömb)
+    /// </summary>
 
     private void Sorrendbe()
     {
