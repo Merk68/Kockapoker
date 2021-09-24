@@ -10,6 +10,7 @@ namespace Kockapoker
   {
     int[] ertekek = new int[5];
     Dictionary<int, int> minta = new Dictionary<int, int>();
+    public int PontErtek { get; set; }
     public void Dobas()
     {
       Feltolt();
@@ -39,7 +40,7 @@ namespace Kockapoker
       {
         Console.WriteLine($"{m.Key}:{m.Value}");
       }
-      return 0;
+      return PontErtek;
     }
     /// <summary>
     /// Statisztikát készít a számokból ( melyik számból mennyi van)
@@ -85,8 +86,76 @@ namespace Kockapoker
     private void KiErtekel()
     {
       Csoportosit();
-      Egyszerusit();
+
+      if (HaOtKulonbozo())
+      {
+        KissorNagysorSemmi();
+      }
+      else
+      {
+        Egyszerusit();
+        //1 pár, 3 egyforma, 4 egyforma, 5 egyforma
+        if (minta.Count == 1)
+        {
+          int melyik = 0;
+          int darab = 0;
+          foreach (var m in minta)
+          {
+            melyik = m.Key;
+            darab = m.Value;
+          }
+          switch (darab)
+          {
+            case 2:
+              PontErtek = melyik;
+              break;
+            case 3:
+              PontErtek = 30 + melyik;
+              break;
+            case 4:
+              PontErtek = 40 + melyik;
+              break;
+            case 5:
+              PontErtek = 1000 + melyik;
+              break;
+            
+
+          }
+        }
+        //2pár és full
+        else
+        {
+
+        }
+      }
+
     }
+
+    private bool HaOtKulonbozo()
+    {
+      return minta.Count == 5;
+    }
+
+    /// <summary>
+    /// Kissor, nagysor, semmi ertelet allitja be.
+    /// </summary>
+
+    private void KissorNagysorSemmi()
+    {
+      if (ertekek[0] == 1 && ertekek[4] == 5)
+      {
+        PontErtek = 100;
+      }
+      else if (ertekek[0] == 2 && ertekek[4] == 6)
+      {
+        PontErtek = 200;
+      }
+      else
+      {
+        PontErtek = 0;
+      }
+    }
+
     /// <summary>
     /// A dobást vissza adja szövegesen összefűzve.
     /// pl.: 1-1-2-3-3-3
