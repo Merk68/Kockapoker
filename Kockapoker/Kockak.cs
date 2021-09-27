@@ -137,7 +137,7 @@ namespace Kockapoker
           }
           else
           {
-            PontErtek = 100;
+            PontErtek = 500;
             foreach (var m in minta)
             {
               if (m.Value == 3)
