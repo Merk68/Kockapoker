@@ -4,13 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kockapoker
+namespace KockaOsztalyParasztTestelese
 {
   class Kockak
   {
     int[] ertekek = new int[5];
     Dictionary<int, int> minta; //= new Dictionary<int, int>();
     public int PontErtek { get; set; }
+
+    public Kockak()
+    {
+    }
+
+    public Kockak(int[] ertekek)
+    {
+      this.ertekek = ertekek;
+    }
+
     public void Dobas()
     {
       Feltolt();
@@ -137,7 +147,7 @@ namespace Kockapoker
           }
           else
           {
-            PontErtek = 100;
+            PontErtek = 500;
             foreach (var m in minta)
             {
               if (m.Value == 3)
@@ -208,6 +218,11 @@ namespace Kockapoker
           }
         }
       }
+    }
+
+    public override bool Equals(object obj)
+    {
+      return obj is Kockak kockak;
     }
   }
 }
